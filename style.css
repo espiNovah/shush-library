@@ -26,9 +26,34 @@
 body {
     background-color: var(--colorAlpha);
     font-family: 'Ubuntu';
+    font-size: 14px;
 }
 
+.s--icon svg,
 .s--icon img {
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 150px 1fr 1fr;
+    padding: 50px;
+    gap: 50px;
+}
+
+.sideNav {
+    display: grid;
+    grid-template-rows: 200px 1fr;
+    background-color: var(--colorSnow);
+    padding: 50px 20px;
+    /* height: 100vh; */
+    border-radius: 20px;
+    justify-items: center;
+}
+
+.navLinks{
+    display: grid;
+    align-content: start;
+    gap: 50px;
 }
