@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Ubuntu';
+    src: url(./fonts/ubuntu-regular-webfont.woff2),
+        url(./fonts/ubuntu-regular-webfont.woff);
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Ubuntu';
+    src: url(./fonts/ubuntu-medium-webfont.woff2),
+        url(./fonts/ubuntu-medium-webfont.woff);
+    font-weight: 500;
+}
+
+:root {
+    --colorAlpha: #E2E7E2;
+    --colorBeta: #1E3D58;
+    --colorSnow: #ffffff;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background-color: var(--colorAlpha);
+    font-family: 'Ubuntu';
+}
+
+.s--icon img {
+    height: 30px;
+    width: 30px;
+}
