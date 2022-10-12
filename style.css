@@ -1,14 +1,14 @@
 @font-face {
-    font-family: 'Ubuntu';
-    src: url(./fonts/ubuntu-regular-webfont.woff2),
-        url(./fonts/ubuntu-regular-webfont.woff);
+    font-family: 'poppins';
+    src: url(./assets/fonts/poppins-regular-webfont.woff2),
+        url(./assets/fonts/poppins-regular-webfont.woff);
     font-weight: 400;
 }
 
 @font-face {
     font-family: 'poppins';
-    src: url(./fonts/poppins-medium-webfont.woff2),
-        url(./fonts/poppins-medium-webfont.woff);
+    src: url(./assets/fonts/poppins-medium-webfont.woff2),
+        url(./assets/fonts/poppins-medium-webfont.woff);
     font-weight: 500;
 }
 
@@ -29,15 +29,25 @@ body {
     font-size: 14px;
 }
 
-.sideNav img:hover {
-    pointer-events: fill;
+.s--icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 35px;
+}
+
+.s--icon img:hover {
+    padding: 10px;
     cursor: pointer;
+    border-radius: 50%;
+    background-color: var(--colorAlpha);
 }
 
 .s--icon svg,
 .s--icon img {
-    height: 35px;
-    width: 35px;
+    height: 100%;
+    width: 100%;
 }
 
 .su--icon img {
@@ -80,6 +90,7 @@ body {
 
 .header--title {
     display: grid;
+    letter-spacing: 1.4px;
 }
 
 .user--panel {
@@ -126,6 +137,9 @@ body {
     box-shadow: 2px 4px 16px gray;
     position: relative;
 }
+.activity--data p {
+    padding-top: 10px;
+}
 
 .new--entry {
     top: -40px;
@@ -135,8 +149,8 @@ body {
     padding: 20px;
     height: 50px;
     width: 50px;
-    font-size: 2.5rem;
-    font-weight: 500;
+    font-size: 3.5rem;
+    font-weight: 400;
     color: var(--colorSnow);
     background-color: var(--colorBeta);
     cursor: pointer;
@@ -155,7 +169,7 @@ body {
 }
 
 .reading--hours h3 {
-    font-size: 3rem;
+    font-size: 2.5rem;
 }
 
 .book--data {
