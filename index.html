@@ -61,6 +61,23 @@
                     </div>
                 </div>
             </div>
+            <div id="entry--form">
+                <form action="" id="add--entry">
+                    <input type="text" placeholder="Book Title" required>
+                    <div class="sh--entry">
+                        <input type="text" placeholder="Author" required>
+                        <select name="isRead" id="add-entry" required>
+                            <option value="Read">Read</option>
+                            <option value="Not yet Read">Not yet read</option>
+                        </select>
+                    </div>
+                    <div class="sh--entry">
+                        <label for="page-count">Number of pages</label>
+                        <input type="number" id="page-count" min="1" required>
+                        <button type="button">ADD BOOK</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="sideBoard">
             <div class="book--rack">
@@ -80,7 +97,7 @@
                         </g>
                     </svg>
                     <div class="book--details">
-                        <h2 class="book--title">The Great Gatsby  is the legendary man who has nine lives</h2>
+                        <h2 class="book--title">The Great Gatsby is the legendary man who has nine lives</h2>
                         <p class="book--author">F. Scott Fitzgerald</p>
                         <p class="book--pages">100</p>
                     </div>
@@ -91,7 +108,10 @@
                         </svg>
                     </div>
                     <div class="book--status">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M14.7 35.9 3.5 24.7l2.15-2.15 9.05 9.05 2.15 2.15Zm8.5 0L12 24.7l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Zm0-8.5-2.15-2.15L33.9 12.4l2.15 2.15Z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                            <path
+                                d="M14.7 35.9 3.5 24.7l2.15-2.15 9.05 9.05 2.15 2.15Zm8.5 0L12 24.7l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Zm0-8.5-2.15-2.15L33.9 12.4l2.15 2.15Z" />
+                        </svg>
                     </div>
                 </div>
                 <!-- <div class="book--log"></div>

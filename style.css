@@ -57,9 +57,10 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 150px 1fr 1fr;
+    grid-template-columns: 150px 400px 1fr;
     grid-template-rows: 100px 1fr;
     padding: 50px;
+    margin-right: 200px;
     gap: 50px;
 }
 
@@ -99,7 +100,6 @@ body {
     justify-content: end;
     gap: 10px;
     grid-template-columns: auto auto auto auto;
-    padding-right: 200px;
 }
 
 .s--user {
@@ -128,7 +128,7 @@ body {
     display: grid;
     justify-items: center;
     width: 300px;
-    height: 350px;
+    height: 300px;
     padding: 50px;
     gap: 30px;
     text-align: center;
@@ -199,7 +199,7 @@ body {
     gap: 20px;
     height: 650px;
     width: 800px;
-    margin-right: 200px;
+    margin-left: 100px;
     padding-right: 50px;
     padding-bottom: 20px;
     scroll-behavior: smooth;
@@ -274,9 +274,68 @@ h2.book--title {
     padding: 10px;
     border-radius: 50%;
     background-color: var(--colorBeta);
-    background-color: #25D366;
+    background-color: #0F9D58;
 
 }
 .book--status:hover {
     background-color: #F4B400;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 20px;
+    margin-top: 20px;
+    background-color: var(--colorBeta);
+}
+form > label {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    color: var(--colorSnow);
+    font-weight: 500px;
+}
+form input, form select {
+    font: inherit;
+    font-weight: 500;
+    border-radius: 15px;
+    padding: 15px;
+    border-color: transparent;
+    background-color: var(--colorSnow);
+    color: #000000;
+}
+form input:focus {
+    outline: none !important;
+    border: 2px solid #000000;
+    box-shadow: 0 0 5px var(--colorAlpha);
+}
+form select:focus {
+    outline: none !important;
+    filter: brightness(.9);
+    box-shadow: 0 0 5px var(--colorAlpha);
+}
+.sh--entry {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.sh--entry label {
+    font-weight: 500;
+    color: #fff;
+}
+.sh--entry input[type='number'] {
+    width: 50px;
+}
+
+form button {
+    flex: 1;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 16px;
+    background-color: #000000;
+    color: var(--colorSnow);
+    padding: 15px;
 }
