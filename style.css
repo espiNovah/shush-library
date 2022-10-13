@@ -192,3 +192,91 @@ body {
 .book--data h3 {
     font-size: 1.5rem;
 }
+.book--rack {
+    box-sizing: border-box;
+    display: grid;
+    grid-auto-rows: 180px;
+    gap: 20px;
+    height: 650px;
+    width: 800px;
+    margin-right: 200px;
+    padding-right: 50px;
+    padding-bottom: 20px;
+    scroll-behavior: smooth;
+    overflow: auto;
+}
+.book--log {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-content: center;
+    gap: 20px;
+    position: relative;
+    border-radius: 20px;
+    padding: 10px 50px;
+    background-color: var(--colorSnow);
+
+}
+.book--log > svg {
+    fill: var(--colorBeta);
+    height: 150px;
+    width: 120px;
+}
+
+.delete--log {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 25px;
+    right: -30px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--colorBeta);
+}
+.delete--log:hover {
+    background-color: rgb(255, 0, 0);
+}
+
+.delete--log > svg {
+    height: 40px;
+    fill: #ffffff;
+}
+
+.book--details {
+    display: grid;
+    gap: 10px;
+    padding: 20px 0px;
+}
+
+h2.book--title {
+    font-weight: 500;
+    line-height: 1.7rem;
+}
+
+.book--author::before {
+    content: 'Author: ';
+    font-weight: bold;
+}
+.book--pages::after {
+    content: ' Pages';
+}
+.book--status > svg {
+    height: 40px;
+    fill: #ffffff;
+}
+.book--status {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 25px;
+    right: -30px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--colorBeta);
+    background-color: #25D366;
+
+}
+.book--status:hover {
+    background-color: #F4B400;
+}
