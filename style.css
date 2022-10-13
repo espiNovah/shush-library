@@ -132,7 +132,9 @@ body {
     background-color: var(--colorSnow);
     box-shadow: 2px 4px 16px gray;
     position: relative;
+    z-index: 2;
 }
+
 .activity--data p {
     padding-top: 10px;
 }
@@ -153,12 +155,15 @@ body {
     font-size: 3.5rem;
     user-select: none;
 }
-.new--entry:hover{
+
+.new--entry:hover {
     background-color: rgb(23 23 16);
 }
-.new--entry:active{
+
+.new--entry:active {
     background-color: rgb(89 94 96);
 }
+
 .userCard {
     width: 150px;
     height: 150px;
@@ -184,6 +189,7 @@ body {
 .book--data h3 {
     font-size: 1.5rem;
 }
+
 .book--rack {
     box-sizing: border-box;
     display: grid;
@@ -197,6 +203,7 @@ body {
     scroll-behavior: smooth;
     overflow: auto;
 }
+
 .book--log {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -208,7 +215,8 @@ body {
     background-color: var(--colorSnow);
 
 }
-.book--log > svg {
+
+.book--log>svg {
     fill: var(--colorBeta);
     height: 150px;
     width: 120px;
@@ -219,18 +227,20 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 25px;
+    top: 35px;
     right: -30px;
     padding: 10px;
     border-radius: 50%;
     background-color: var(--colorBeta);
+    cursor: pointer;
 }
+
 .delete--log:hover {
     background-color: rgb(255, 0, 0);
 }
 
-.delete--log > svg {
-    height: 40px;
+.delete--log>svg {
+    height: 30px;
     fill: #ffffff;
 }
 
@@ -249,32 +259,39 @@ h2.book--title {
     content: 'Author: ';
     font-weight: bold;
 }
+
 .book--pages::after {
     content: ' Pages';
 }
-.book--status > svg {
-    height: 40px;
+
+.book--status>svg {
+    height: 30px;
     fill: #ffffff;
 }
+
 .book--status {
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    bottom: 25px;
+    bottom: 35px;
     right: -30px;
     padding: 10px;
     border-radius: 50%;
     background-color: var(--colorBeta);
     background-color: #0F9D58;
+    cursor: pointer;
 
 }
+
 .book--status:hover {
     background-color: #F4B400;
 }
+
 #entry--form {
     height: 270px;
 }
+
 form {
     display: flex;
     flex-direction: column;
@@ -283,14 +300,17 @@ form {
     margin-top: 20px;
     background-color: var(--colorBeta);
 }
-form > label {
+
+form>label {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     color: var(--colorSnow);
     font-weight: 500px;
 }
-form input, form select {
+
+form input,
+form select {
     font-size: 1rem;
     border-radius: 15px;
     padding: 15px;
@@ -298,16 +318,19 @@ form input, form select {
     background-color: var(--colorSnow);
     color: #000000;
 }
+
 form input:focus {
     outline: none !important;
     border: 2px solid #000000;
     box-shadow: 0 0 5px var(--colorAlpha);
 }
+
 form select:focus {
     outline: none !important;
     filter: brightness(.9);
     box-shadow: 0 0 5px var(--colorAlpha);
 }
+
 .sh--entry {
     display: flex;
     justify-content: space-between;
@@ -320,6 +343,7 @@ form select:focus {
     font-weight: 500;
     color: #fff;
 }
+
 .sh--entry input[type='number'] {
     width: 50px;
 }
@@ -334,11 +358,30 @@ form button {
     color: var(--colorSnow);
     padding: 15px;
 }
-form button:hover{
+
+form button:hover {
     background-color: #2d2929;
     cursor: pointer;
 }
 
 form button:active {
     background-color: #000000;
+}
+
+.slide--in {
+    position: relative;
+    z-index: 1;
+    bottom: 5px;
+    -webkit-animation: linear;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 1s;
+}
+
+@-webkit-keyframes slideIn {
+    0% {
+        bottom: 25px;
+    }
+    100% {
+        bottom: 5px;
+    }
 }

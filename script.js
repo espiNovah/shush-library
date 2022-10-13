@@ -69,9 +69,11 @@ function showForm(){
     if (formShowing) {
         formShowing = false;
         formS.remove();
+        formSection.classList.remove('slide--in')
         entrySign.textContent = '+'
     } else {
         formSection.appendChild(formSec) 
+        formSection.classList.add('slide--in')
         formShowing = true;
         entrySign.textContent = '-';
     }
