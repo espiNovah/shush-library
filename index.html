@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <title>Shush Library</title>
 </head>
 
@@ -40,9 +40,7 @@
         </div>
         <div class="activeBoard">
             <div class="activeCard">
-                <div class="new--entry">
-                    <p>+</p>
-                </div>
+                <div class="new--entry">+</div>
                 <div class="userCard"><img src="./assets/images/sam.jpg" alt=""></div>
                 <div class="activity--data">
                     <div class="reading--hours">
@@ -62,7 +60,7 @@
                 </div>
             </div>
             <div id="entry--form">
-                <form action="" id="add--entry">
+                <!-- <form action="" id="add--entry">
                     <input type="text" placeholder="Book Title" required>
                     <div class="sh--entry">
                         <input type="text" placeholder="Author" required>
@@ -76,7 +74,7 @@
                         <input type="number" id="page-count" min="1" required>
                         <button type="button">ADD BOOK</button>
                     </div>
-                </form>
+                </form> -->
             </div>
         </div>
         <div class="sideBoard">
@@ -97,7 +95,7 @@
                         </g>
                     </svg>
                     <div class="book--details">
-                        <h2 class="book--title">The Great Gatsby is the legendary man who has nine lives</h2>
+                        <h2 class="book--title">The Great Gatsby</h2>
                         <p class="book--author">F. Scott Fitzgerald</p>
                         <p class="book--pages">100</p>
                     </div>
