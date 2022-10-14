@@ -4,6 +4,7 @@ const bookRack = document.querySelector('.book--rack');
 let formShowing = false;
 let formSec, bookTitle, bookAuthor, bookStatus, bookPages;
 let lastRack, firstRack, bLog;
+let totalBook = 1;
 let myLibrary = [];
 
 function createForm() {
@@ -16,7 +17,7 @@ function createForm() {
     titleInput.setAttribute('name', 'title');
     titleInput.setAttribute('class', 'b--title');
     titleInput.setAttribute('placeholder', 'Book Title');
-    // titleInput.required = true;
+    titleInput.required = true;
 
     const divSection = document.createElement('div');
     divSection.classList.add('sh--entry');
@@ -27,7 +28,7 @@ function createForm() {
     authorInput.setAttribute('name', 'author');
     authorInput.setAttribute('class', 'b--author');
     authorInput.setAttribute('placeholder', 'Author');
-    // authorInput.required = true;
+    authorInput.required = true;
 
 
     const selectChoice = document.createElement('select');
@@ -39,7 +40,7 @@ function createForm() {
         selectChoice.appendChild(option);
     }
     selectChoice.setAttribute('class', 'b--status');
-    // selectChoice.required = true;
+    selectChoice.required = true;
 
     divSection.appendChild(authorInput);
     divSection.appendChild(selectChoice);
@@ -57,7 +58,7 @@ function createForm() {
     numberInput.setAttribute('class', 'b--pages');
     numberInput.id = 'page-count'
     numberInput.setAttribute('min', '1');
-    // numberInput.required = true;
+    numberInput.required = true;
 
     const addBtn = document.createElement('button');
     addBtn.setAttribute('type', 'submit');
@@ -109,7 +110,6 @@ function getBookInfo(e) {
     bookPages = form.querySelector('.b--pages').value;
 
     updateCatalog();
-
     createShelf()
     addBookToLibrary();
     // hideForm();
@@ -132,6 +132,11 @@ function randomColor(){
 function changeBookColor(item) {
     let rgb = randomColor();
     item.style.fill = rgb;
+}
+
+function updateBookCount() {
+    const bCount = document.querySelector('.a--data').childNodes[0];
+    bCount.textContent = totalBook; 
 }
 
 function createShelf () {
@@ -192,6 +197,7 @@ function addBookToLibrary() {
     const bRack = Array.from(document.querySelectorAll('.book--log'));
     lastRack = bRack[bRack.length - 1];
     firstRack = bRack[0];
+    totalBook = bRack.length;
     const lastBook = myLibrary.at(-1);
     
     const bCover = lastRack.querySelector('.bookSvg');
@@ -209,6 +215,8 @@ function addBookToLibrary() {
     }
 
     changeBookColor(bCover);
+    updateBookCount();
+       
 }
 
 
