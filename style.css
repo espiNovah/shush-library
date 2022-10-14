@@ -140,20 +140,24 @@ body {
 }
 
 .new--entry {
-    top: -40px;
-    right: -40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
     border-radius: 50%;
-    padding: 20px;
-    height: 50px;
+    top: -40px;
+    right: -40px;
     width: 50px;
-    background-color: var(--colorBeta);
+    height: 50px;
+    padding: 50px;
     cursor: pointer;
-    transition: background-color .4s;
     font-weight: 400;
-    color: var(--colorSnow);
     font-size: 3.5rem;
+    border: none;
     user-select: none;
+    color: var(--colorSnow);
+    background-color: var(--colorBeta);
+    transition: background-color .4s;
 }
 
 .new--entry:hover {
@@ -379,9 +383,27 @@ form button:active {
 
 @-webkit-keyframes slideIn {
     0% {
-        bottom: 25px;
+        bottom: 300px;
     }
     100% {
         bottom: 5px;
+    }
+}
+
+.slide--out {
+    position: relative;
+    z-index: 1;
+    bottom: 30px;
+    -webkit-animation: linear;
+    -webkit-animation-name: slideOut;
+    -webkit-animation-duration: .4s;
+}
+
+@-webkit-keyframes slideOut {
+    0% {
+        bottom: 5px;
+    }
+    100% {
+        bottom: 300px;
     }
 }

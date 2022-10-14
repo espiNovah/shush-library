@@ -14,7 +14,7 @@ function createForm() {
 
     const titleInput = document.createElement('input');
     titleInput.setAttribute('type', 'text');
-    titleInput.setAttribute('name', 'title');
+    titleInput.setAttribute('name', 'title');   
     titleInput.setAttribute('class', 'b--title');
     titleInput.setAttribute('placeholder', 'Book Title');
     titleInput.required = true;
@@ -40,7 +40,6 @@ function createForm() {
         selectChoice.appendChild(option);
     }
     selectChoice.setAttribute('class', 'b--status');
-    selectChoice.required = true;
 
     divSection.appendChild(authorInput);
     divSection.appendChild(selectChoice);
@@ -62,6 +61,7 @@ function createForm() {
 
     const addBtn = document.createElement('button');
     addBtn.setAttribute('type', 'submit');
+    numberInput.setAttribute('name', 'submit');
     addBtn.id = 'submitEntry';
     addBtn.textContent = 'ADD BOOK';
 
@@ -74,6 +74,8 @@ function createForm() {
     Form.appendChild(divSplit);
 
     showForm();
+    Form.addEventListener('submit', getBookInfo);
+    
 }
 
 function showForm() {
@@ -83,11 +85,9 @@ function showForm() {
     } else {
         formShowing = true;
         formSection.appendChild(formSec);
+        formSection.classList.remove('slide--out');
         formSection.classList.add('slide--in');
         entrySign.textContent = '-';
-
-        const submitEntry = document.querySelector('#submitEntry');
-        submitEntry.addEventListener('click', getBookInfo);
     }
 }
 
@@ -96,8 +96,13 @@ function hideForm() {
     const entrySign = document.querySelector('.new--entry');
 
     formShowing = false;
-    formS.remove();
-    formSection.classList.remove('slide--in')
+    formSection.classList.remove('slide--in');
+    formSection.classList.add('slide--out');
+    entrySign.disabled = true;
+    setTimeout(()=> {
+        formS.remove()
+        entrySign.disabled = false;
+    }, 400)
     entrySign.textContent = '+'
 }
 
@@ -112,7 +117,7 @@ function getBookInfo(e) {
     updateCatalog();
     createShelf()
     addBookToLibrary();
-    // hideForm();
+    hideForm();
 }
 
 function updateCatalog() {
