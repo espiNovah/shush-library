@@ -2,9 +2,8 @@ const addNew = document.querySelector('.new--entry');
 const formSection = document.querySelector('#entry--form');
 const bookRack = document.querySelector('.book--rack');
 let formShowing = false;
-let formSec;
-let bookTitle, bookAuthor, bookStatus, bookPages;
-let lastRack, prevRack, bLog, shelfNumber;
+let formSec, bookTitle, bookAuthor, bookStatus, bookPages;
+let lastRack, firstRack, bLog;
 let myLibrary = [];
 
 function createForm() {
@@ -14,6 +13,7 @@ function createForm() {
 
     const titleInput = document.createElement('input');
     titleInput.setAttribute('type', 'text');
+    titleInput.setAttribute('name', 'title');
     titleInput.setAttribute('class', 'b--title');
     titleInput.setAttribute('placeholder', 'Book Title');
     // titleInput.required = true;
@@ -24,6 +24,7 @@ function createForm() {
 
     const authorInput = document.createElement('input');
     authorInput.setAttribute('type', 'text');
+    authorInput.setAttribute('name', 'author');
     authorInput.setAttribute('class', 'b--author');
     authorInput.setAttribute('placeholder', 'Author');
     // authorInput.required = true;
@@ -52,6 +53,7 @@ function createForm() {
 
     const numberInput = document.createElement('input');
     numberInput.setAttribute('type', 'number');
+    numberInput.setAttribute('name', 'number');
     numberInput.setAttribute('class', 'b--pages');
     numberInput.id = 'page-count'
     numberInput.setAttribute('min', '1');
@@ -110,7 +112,6 @@ function getBookInfo(e) {
 
     createShelf()
     addBookToLibrary();
-    // console.log(myLibrary);
     // hideForm();
 }
 
@@ -119,8 +120,21 @@ function updateCatalog() {
     myLibrary.push(book)
 }
 
+function randomColor(){
+    const randomRGB = (min, max) => min + Math.floor(Math.random() * (max - min + 1));
+    const r = randomRGB(0, 255);
+    const g = randomRGB(0, 255);
+    const b = randomRGB(0, 255);
+    const rgbColor = `rgb(${r},${g},${b})`;
+    return rgbColor;
+}
+
+function changeBookColor(item) {
+    let rgb = randomColor();
+    item.style.fill = rgb;
+}
+
 function createShelf () {
-    // const bLog = document.createElement('div');
     bLog = document.createElement('div');
     bLog.setAttribute('class', 'book--log');
     bLog.innerHTML = '<svg class="bookSvg" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 459.319 459.319" style="enable-background:new 0 0 459.319 459.319;" xml:space="preserve"><g><path d="M94.924,366.674h312.874c0.958,0,1.886-0.136,2.778-0.349c0.071,0,0.13,0.012,0.201,0.012c6.679,0,12.105-5.42,12.105-12.104V12.105C422.883,5.423,417.456,0,410.777,0h-2.955H114.284H94.941c-32.22,0-58.428,26.214-58.428,58.425c0,0.432,0.085,0.842,0.127,1.259c-0.042,29.755-0.411,303.166-0.042,339.109c-0.023,0.703-0.109,1.389-0.109,2.099c0,30.973,24.252,56.329,54.757,58.245c0.612,0.094,1.212,0.183,1.847,0.183h317.683c6.679,0,12.105-5.42,12.105-12.105v-45.565c0-6.68-5.427-12.105-12.105-12.105s-12.105,5.426-12.105,12.105v33.461H94.924c-18.395,0-33.411-14.605-34.149-32.817c0.018-0.325,0.077-0.632,0.071-0.963c-0.012-0.532-0.03-1.359-0.042-2.459C61.862,380.948,76.739,366.674,94.924,366.674z M103.178,58.425c0-6.682,5.423-12.105,12.105-12.105s12.105,5.423,12.105,12.105V304.31c0,6.679-5.423,12.105-12.105,12.105s-12.105-5.427-12.105-12.105V58.425z" /></g></svg>';
@@ -166,7 +180,6 @@ demoBook = {
     status: 'Read',
 }
 
-// let myLibrary = [demoBook];
 function Book(bookTitle, bookAuthor, bookPages, bookStatus) {
     this.title = bookTitle;
     this.author = bookAuthor;
@@ -177,16 +190,25 @@ function Book(bookTitle, bookAuthor, bookPages, bookStatus) {
 function addBookToLibrary() {
 
     const bRack = Array.from(document.querySelectorAll('.book--log'));
-    const lastRack = bRack[bRack.length - 1];
+    lastRack = bRack[bRack.length - 1];
+    firstRack = bRack[0];
     const lastBook = myLibrary.at(-1);
-
+    
+    const bCover = lastRack.querySelector('.bookSvg');
     const bTitle = lastRack.querySelector('.book--title');
     const bAuthor = lastRack.querySelector('.book--author');
     const bPages = lastRack.querySelector('.book--pages');
-
+    
     bTitle.textContent = `${lastBook.title}`;
     bAuthor.textContent = `${lastBook.author}`;
     bPages.textContent = `${lastBook.pages}`;
+    
+
+    if (bRack.length > 0) {
+        bookRack.insertBefore(lastRack, firstRack);
+    }
+
+    changeBookColor(bCover);
 }
 
 
