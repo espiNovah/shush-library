@@ -178,13 +178,6 @@ function createShelf () {
     bookRack.appendChild(bLog);
 }
 
-demoBook = {
-    title: 'The Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-    pages: 110,
-    status: 'Read',
-}
-
 function Book(bookTitle, bookAuthor, bookPages, bookStatus) {
     this.title = bookTitle;
     this.author = bookAuthor;
@@ -215,9 +208,21 @@ function addBookToLibrary() {
     }
 
     changeBookColor(bCover);
-    updateBookCount();
-       
+    updateBookCount();   
 }
 
 
 addNew.addEventListener('click', createForm);
+document.addEventListener('DOMContentLoaded', () => {
+    demoBook = {
+        title: 'The Great Gatsby',
+        author: 'F. Scott Fitzgerald',
+        pages: '110',
+        status: 'Read',
+    }
+    myLibrary.push(demoBook);
+    myLibrary.forEach(()=> {
+        createShelf();
+        addBookToLibrary();
+    })
+})
