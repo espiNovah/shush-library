@@ -57,7 +57,7 @@ body {
 
 .container {
     display: grid;
-    grid-template-columns: 150px 450px 1fr;
+    grid-template-columns: 150px 450px 800px;
     grid-template-rows: 100px 1fr;
     padding: 50px;
     margin-right: 200px;
@@ -205,7 +205,12 @@ body {
     margin-left: 100px;
     padding-right: 50px;
     padding-bottom: 20px;
+    overflow: hidden;
     scroll-behavior: smooth;
+}
+
+.book--rack:hover {
+    height: 650px;
     overflow: auto;
 }
 
@@ -214,6 +219,7 @@ body {
     grid-template-columns: auto 1fr;
     align-content: center;
     gap: 20px;
+    width: 600px;
     position: relative;
     border-radius: 20px;
     padding: 10px 50px;
@@ -243,6 +249,7 @@ body {
 .delete--log:hover {
     background-color: rgb(255, 0, 0);
 }
+
 .delete--log:active {
     filter: brightness(0.95);
     box-shadow: 2px 2px 8px grey;
@@ -255,6 +262,7 @@ body {
 
 .book--details {
     display: grid;
+    position: relative;
     gap: 10px;
     padding: 20px 0px;
 }
@@ -380,7 +388,6 @@ form button:active {
 .slide--in {
     position: relative;
     z-index: 1;
-    bottom: 5px;
     -webkit-animation: linear;
     -webkit-animation-name: slideIn;
     -webkit-animation-duration: .2s;
@@ -390,6 +397,7 @@ form button:active {
     0% {
         bottom: 300px;
     }
+
     100% {
         bottom: 5px;
     }
@@ -398,7 +406,6 @@ form button:active {
 .slide--out {
     position: relative;
     z-index: 1;
-    bottom: 30px;
     -webkit-animation: linear;
     -webkit-animation-name: slideOut;
     -webkit-animation-duration: .4s;
@@ -408,7 +415,25 @@ form button:active {
     0% {
         bottom: 5px;
     }
+
     100% {
         bottom: 300px;
+    }
+}
+
+.delete--out {
+    position: relative;
+    -webkit-animation: linear;
+    -webkit-animation-name: run;
+    -webkit-animation-duration: .5s;
+}
+
+@-webkit-keyframes run {
+    0% {
+        right: 10%;
+    }
+
+    100% {
+        left: calc(100vw - 40%);
     }
 }
