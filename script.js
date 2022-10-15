@@ -229,6 +229,8 @@ function toggleBookOption() {
                 btn.addEventListener('click', () => {
                     myLibrary.splice(-1);
                     btn.parentElement.remove();
+                    totalBook--
+                    updateBookCount();
                     return;
                 })
             }
