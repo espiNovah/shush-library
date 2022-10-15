@@ -17,7 +17,7 @@ function createForm() {
     titleInput.setAttribute('name', 'title');
     titleInput.setAttribute('class', 'b--title');
     titleInput.setAttribute('placeholder', 'Book Title');
-    // titleInput.required = true;
+    titleInput.required = true;
 
     const divSection = document.createElement('div');
     divSection.classList.add('sh--entry');
@@ -28,7 +28,7 @@ function createForm() {
     authorInput.setAttribute('name', 'author');
     authorInput.setAttribute('class', 'b--author');
     authorInput.setAttribute('placeholder', 'Author');
-    // authorInput.required = true;
+    authorInput.required = true;
 
 
     const selectChoice = document.createElement('select');
@@ -57,7 +57,7 @@ function createForm() {
     numberInput.setAttribute('class', 'b--pages');
     numberInput.id = 'page-count'
     numberInput.setAttribute('min', '1');
-    // numberInput.required = true;
+    numberInput.required = true;
 
     const addBtn = document.createElement('button');
     addBtn.setAttribute('type', 'submit');
@@ -233,7 +233,7 @@ function toggleBookOption() {
                     deleteBtn[j].parentElement.classList.add('delete--out');
                     setTimeout(() => {
                         deleteBtn[j].parentElement.remove();
-                    }, 100)
+                    }, 50)
                 })
             } return;
         }
