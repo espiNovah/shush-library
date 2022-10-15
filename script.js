@@ -138,8 +138,9 @@ function changeBookColor(item) {
     item.style.fill = rgb;
 }
 
-function updateBookCount() {
+function updateBookCount(n) {
     const bCount = document.querySelector('.a--data').childNodes[0];
+    totalBook = n;
     bCount.textContent = totalBook;
 }
 
@@ -192,7 +193,7 @@ function addBookToLibrary() {
 
     lastRack = bRack[bRack.length - 1];
     firstRack = bRack[0];
-    totalBook = bRack.length;
+    // totalBook++;
 
     const bCover = lastRack.querySelector('.bookSvg');
     const bTitle = lastRack.querySelector('.book--title');
@@ -209,7 +210,7 @@ function addBookToLibrary() {
     }
 
     changeBookColor(bCover);
-    updateBookCount();
+    updateBookCount(myLibrary.length);
     toggleBookOption();
 }
 
@@ -218,24 +219,22 @@ function toggleBookOption() {
     const deleteBtn = Array.from(document.querySelectorAll('.delete--log'));
     let rackCount, dBtnCount;
 
-    shelf.forEach((rack) => {
-        rackCount = shelf.indexOf(rack);
-        rack.setAttribute('data-key', `${rackCount}`);
+    for (let i = 0; i < shelf.length; i++) {
+        rackCount = shelf.indexOf(shelf[i])
+        shelf[i].setAttribute('data-key', `${rackCount}`);
 
-        deleteBtn.forEach((btn) => {
-            dBtnCount = deleteBtn.indexOf(btn);
-            btn.setAttribute('data-key', `${rackCount}`);
+        for (let j = 0; j < deleteBtn.length; j++) {
+            dBtnCount = deleteBtn.indexOf(deleteBtn[j]);
+            deleteBtn[j].setAttribute('data-key', `${rackCount}`);
             if (dBtnCount == rackCount) {
-                btn.addEventListener('click', () => {
-                    myLibrary.splice(-1);
-                    btn.parentElement.remove();
-                    totalBook--
-                    updateBookCount();
-                    return;
+                deleteBtn[j].addEventListener('click', () => {
+                    myLibrary.splice(dBtnCount, 1);
+                    updateBookCount(myLibrary.length);
+                    deleteBtn[j].parentElement.remove();
                 })
-            }
-        });
-    })
+            } return;
+        }
+    }
 }
 
 addNew.addEventListener('click', createForm);
@@ -250,6 +249,7 @@ document.addEventListener('DOMContentLoaded', () => {
     myLibrary.forEach(() => {
         createShelf();
         addBookToLibrary();
+
     })
 })
 

@@ -161,11 +161,12 @@ body {
 }
 
 .new--entry:hover {
-    background-color: rgb(23 23 16);
+    box-shadow: 2px 4px 20px grey;
 }
 
 .new--entry:active {
     background-color: rgb(89 94 96);
+    background-color: rgb(23 23 16);
 }
 
 .userCard {
@@ -241,6 +242,10 @@ body {
 
 .delete--log:hover {
     background-color: rgb(255, 0, 0);
+}
+.delete--log:active {
+    filter: brightness(0.95);
+    box-shadow: 2px 2px 8px grey;
 }
 
 .delete--log>svg {
