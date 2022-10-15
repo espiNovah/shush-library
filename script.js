@@ -233,7 +233,7 @@ function toggleBookOption() {
                     deleteBtn[j].parentElement.classList.add('delete--out');
                     setTimeout(() => {
                         deleteBtn[j].parentElement.remove();
-                    }, 50)
+                    }, 100)
                 })
             } return;
         }

@@ -161,7 +161,7 @@ body {
 }
 
 .new--entry:hover {
-    box-shadow: 2px 4px 20px grey;
+    filter: brightness(1.1);
 }
 
 .new--entry:active {
@@ -222,11 +222,12 @@ body {
     position: relative;
     border-radius: 20px;
     padding: 10px 50px;
+    margin-left: 10px;
     background-color: var(--colorSnow);
 
 }
 .book--log:hover {
-    box-shadow: 0px 6px 2px gray;
+    box-shadow: -1px 6px 9px grey
 }
 
 .book--log>svg {
@@ -427,7 +428,7 @@ form button:active {
     position: relative;
     -webkit-animation: linear;
     -webkit-animation-name: run;
-    -webkit-animation-duration: .5s;
+    -webkit-animation-duration: 1s;
 }
 
 @-webkit-keyframes run {
