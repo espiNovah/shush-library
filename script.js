@@ -193,7 +193,6 @@ function addBookToLibrary() {
 
     lastRack = bRack[bRack.length - 1];
     firstRack = bRack[0];
-    // totalBook++;
 
     const bCover = lastRack.querySelector('.bookSvg');
     const bTitle = lastRack.querySelector('.book--title');
@@ -252,7 +251,6 @@ document.addEventListener('DOMContentLoaded', () => {
     myLibrary.forEach(() => {
         createShelf();
         addBookToLibrary();
-
     })
 })
 

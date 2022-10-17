@@ -28,7 +28,9 @@ body {
     font-family: 'poppins';
     font-size: 14px;
 }
-
+.favIcon img {
+    width: 100%;
+}
 .s--icon {
     display: flex;
     justify-content: center;
