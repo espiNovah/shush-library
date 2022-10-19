@@ -243,6 +243,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 30px;
+    width: 30px;    
     top: 35px;
     right: -25px;
     padding: 10px;
@@ -296,18 +298,18 @@ h2.book--title {
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 30px;
+    width: 30px;
     bottom: 35px;
     right: -25px;
     padding: 10px;
     border-radius: 50%;
-    background-color: var(--colorBeta);
-    background-color: #0F9D58;
     cursor: pointer;
 
 }
 
 .book--status:hover {
-    background-color: #F4B400;
+    filter: brightness(1.1);
 }
 
 #entry--form {

@@ -3,7 +3,7 @@ const formSection = document.querySelector('#entry--form');
 const bookRack = document.querySelector('.book--rack');
 let formShowing = false;
 let formSec, bookTitle, bookAuthor, bookStatus, bookPages;
-let lastRack, firstRack, bLog, dLog, bStatus, rackCount;
+let lastRack, firstRack, bLog, dLog, bStatus, rackCount, dBtnCount, sBtnCount;
 let totalBook = 0;
 let myLibrary = [];
 
@@ -17,7 +17,7 @@ function createForm() {
     titleInput.setAttribute('name', 'title');
     titleInput.setAttribute('class', 'b--title');
     titleInput.setAttribute('placeholder', 'Book Title');
-    titleInput.required = true;
+    // titleInput.required = true;
 
     const divSection = document.createElement('div');
     divSection.classList.add('sh--entry');
@@ -28,11 +28,11 @@ function createForm() {
     authorInput.setAttribute('name', 'author');
     authorInput.setAttribute('class', 'b--author');
     authorInput.setAttribute('placeholder', 'Author');
-    authorInput.required = true;
+    // authorInput.required = true;
 
 
     const selectChoice = document.createElement('select');
-    const selectItem = ["Read", "Not Yet Read"];
+    const selectItem = ["Read", "Not read"];
     for (let i = 0; i < selectItem.length; i++) {
         let option = document.createElement("option");
         option.value = selectItem[i];
@@ -57,7 +57,7 @@ function createForm() {
     numberInput.setAttribute('class', 'b--pages');
     numberInput.id = 'page-count'
     numberInput.setAttribute('min', '1');
-    numberInput.required = true;
+    // numberInput.required = true;
 
     const addBtn = document.createElement('button');
     addBtn.setAttribute('type', 'submit');
@@ -109,7 +109,7 @@ function getBookInfo(e) {
     e.preventDefault();
     const form = document.getElementById('add--entry');
     bookTitle = form.querySelector('.b--title').value;
-    bookAuthor = document.querySelector('.b--author').value;
+    bookAuthor = form.querySelector('.b--author').value;
     bookStatus = form.querySelector('.b--status').value;
     bookPages = form.querySelector('.b--pages').value;
 
@@ -165,13 +165,13 @@ function createShelf() {
     bDetails.appendChild(bAuthor);
     bDetails.appendChild(bPages);
 
-    dLog = document.createElement('div');
+    dLog = document.createElement('img');
     dLog.setAttribute('class', 'delete--log');
-    dLog.innerHTML = ' <svg class="deleteSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"> <path d="M13.05 42q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.5H9.5q-.65 0-1.075-.425Q8 9.65 8 9q0-.65.425-1.075Q8.85 7.5 9.5 7.5h7.9q0-.65.425-1.075Q18.25 6 18.9 6h10.2q.65 0 1.075.425.425.425.425 1.075h7.9q.65 0 1.075.425Q40 8.35 40 9q0 .65-.425 1.075-.425.425-1.075.425h-.55V39q0 1.2-.9 2.1-.9.9-2.1.9Zm0-31.5V39h21.9V10.5Zm5.3 22.7q0 .65.425 1.075.425.425 1.075.425.65 0 1.075-.425.425-.425.425-1.075V16.25q0-.65-.425-1.075-.425-.425-1.075-.425-.65 0-1.075.425-.425.425-.425 1.075Zm8.3 0q0 .65.425 1.075.425.425 1.075.425.65 0 1.075-.425.425-.425.425-1.075V16.25q0-.65-.425-1.075-.425-.425-1.075-.425-.65 0-1.075.425-.425.425-.425 1.075Zm-13.6-22.7V39 10.5Z" /></svg>';
+    dLog.setAttribute('src', './assets/icons/delete.png');
 
-    bStatus = document.createElement('div');
+    bStatus = document.createElement('img');
     bStatus.setAttribute('class', 'book--status');
-    bStatus.innerHTML = '<svg class="statusSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path d="M14.7 35.9 3.5 24.7l2.15-2.15 9.05 9.05 2.15 2.15Zm8.5 0L12 24.7l2.15-2.15 9.05 9.05 19.2-19.2 2.15 2.15Zm0-8.5-2.15-2.15L33.9 12.4l2.15 2.15Z" /></svg>';
+    bStatus.setAttribute('src', './assets/icons/status.png');
 
     bLog.appendChild(bDetails)
     bLog.appendChild(dLog);
@@ -189,7 +189,7 @@ function Book(bookTitle, bookAuthor, bookPages, bookStatus) {
 
 function addBookToLibrary() {
     const bRack = Array.from(document.querySelectorAll('.book--log'));
-    const lastBook = myLibrary.at(-1);
+    const newBook = myLibrary.at(-1);
 
     lastRack = bRack[bRack.length - 1];
     firstRack = bRack[0];
@@ -198,11 +198,12 @@ function addBookToLibrary() {
     const bTitle = lastRack.querySelector('.book--title');
     const bAuthor = lastRack.querySelector('.book--author');
     const bPages = lastRack.querySelector('.book--pages');
+    const statusTag = lastRack.querySelector('.book--status');
 
-    bTitle.textContent = `${lastBook.title}`;
-    bAuthor.textContent = `${lastBook.author}`;
-    bPages.textContent = `${lastBook.pages}`;
-
+    bTitle.textContent = `${newBook.title}`;
+    bAuthor.textContent = `${newBook.author}`;
+    bPages.textContent = `${newBook.pages}`;
+    bStatus = `${newBook.status}`;
 
     if (bRack.length > 0) {
         bookRack.insertBefore(lastRack, firstRack);
@@ -210,34 +211,70 @@ function addBookToLibrary() {
 
     changeBookColor(bCover);
     updateBookCount(myLibrary.length);
+    if (bStatus.toLowerCase() == 'read') {
+        statusTag.style.backgroundColor = '#0F9D58'
+    } else if (bStatus.toLowerCase() == 'not read') {
+        statusTag.style.backgroundColor = '#F4B400'
+    }
+
     toggleBookOption();
 }
 
 function toggleBookOption() {
     const shelf = Array.from(document.querySelectorAll('.book--log'));
     const deleteBtn = Array.from(document.querySelectorAll('.delete--log'));
-    let rackCount, dBtnCount;
+    const statusBtn = Array.from(document.querySelectorAll('.book--status'));
 
-    for (let i = 0; i < shelf.length; i++) {
-        rackCount = shelf.indexOf(shelf[i])
-        shelf[i].setAttribute('data-key', `${rackCount}`);
+    for (let j = 0; j < 1; j++) {
+        let numb = myLibrary.length - 1;
+        for (let i = 0; i < myLibrary.length; i++) {
+            // console.log(`dummy i value: ${i}`);
+            shelf[i].setAttribute('data-key', `${numb}`);
+            statusBtn[i].setAttribute('data-key', `${numb}`);
 
-        for (let j = 0; j < deleteBtn.length; j++) {
-            dBtnCount = deleteBtn.indexOf(deleteBtn[j]);
-            deleteBtn[j].setAttribute('data-key', `${rackCount}`);
-            if (dBtnCount == rackCount) {
-                deleteBtn[j].addEventListener('click', () => {
-                    myLibrary.splice(dBtnCount, 1);
-                    updateBookCount(myLibrary.length);
-                    deleteBtn[j].parentElement.classList.add('delete--out');
-                    setTimeout(() => {
-                        deleteBtn[j].parentElement.remove();
-                    }, 100)
-                })
-            } return;
+            deleteBtn[i].addEventListener('click', deleteShelf)
+            statusBtn[i].addEventListener('click', changeReadStatus)
+            numb = numb - 1;
+        }
+    }
+
+    function deleteShelf(e) {
+        e.target.parentElement.classList.add('delete--out');
+        setTimeout(() => {
+            e.target.parentElement.remove();
+        }, 100)
+        myLibrary.splice(dBtnCount, 1)
+        updateBookCount(myLibrary.length);
+    }
+}
+
+function changeReadStatus(e) {
+    const shelf = Array.from(document.querySelectorAll('.book--log'));
+    const statusBtn = Array.from(document.querySelectorAll('.book--status'));
+
+    for (let i = 0; i < 1; i++) {
+        let numb = myLibrary.length - 1;
+        let sNumb = myLibrary.length - 1;
+
+        for (let j = 0; j < statusBtn.length; j++) {
+            shelf[j].setAttribute('data-key', `${sNumb}`);
+            statusBtn[j].setAttribute('data-key', `${numb}`);
+            if (e.target.getAttribute('data-key') == statusBtn[j].getAttribute('data-key')) {
+                let isRead = myLibrary[numb].status.toLowerCase();
+                if (isRead === 'read') {
+                    e.target.style.backgroundColor = '#F4B400';
+                    myLibrary[numb].status = 'Not read';
+                } else if (isRead === 'not read') {
+                    e.target.style.backgroundColor = '#0F9D58';
+                    myLibrary[numb].status = 'Read';
+                }
+            }
+            numb = numb - 1;
+            sNumb = sNumb - 1;
         }
     }
 }
+
 
 addNew.addEventListener('click', createForm);
 document.addEventListener('DOMContentLoaded', () => {
