@@ -95,6 +95,13 @@ body {
     display: grid;
     letter-spacing: 1.4px;
 }
+.header--title a {
+    color: red;
+    text-decoration: none;
+}
+.header--title a:hover {
+    color: var(--colorBeta);
+}
 
 .user--panel {
     display: grid;
