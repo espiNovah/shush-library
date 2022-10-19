@@ -5,6 +5,7 @@ let formShowing = false;
 let formSec, bookTitle, bookAuthor, bookStatus, bookPages;
 let lastRack, firstRack, bLog, dLog, bStatus, rackCount, dBtnCount, sBtnCount;
 let totalBook = 0;
+let totalRead = 0;
 let myLibrary = [];
 
 function createForm() {
@@ -98,7 +99,8 @@ function hideForm() {
     formSection.classList.remove('slide--in');
     formSection.classList.add('slide--out');
     entrySign.disabled = true;
-    setTimeout(() => {
+    setTimeout(
+        () => {
         formS.remove()
         entrySign.disabled = false;
     }, 400)
@@ -138,10 +140,19 @@ function changeBookColor(item) {
     item.style.fill = rgb;
 }
 
-function updateBookCount(n) {
+function updateBookCount() {
     const bCount = document.querySelector('.a--data').childNodes[0];
-    totalBook = n;
+    totalBook = myLibrary.length;
     bCount.textContent = totalBook;
+}
+
+function checkReadBook() {
+    const readBooks = myLibrary.filter(book => {
+        return book.status.toLowerCase() == 'read'
+    })
+    totalRead = readBooks.length
+    const cRead = document.querySelector('.b--data').childNodes[0];
+    cRead.textContent = totalRead;
 }
 
 function createShelf() {
@@ -203,17 +214,18 @@ function addBookToLibrary() {
     bTitle.textContent = `${newBook.title}`;
     bAuthor.textContent = `${newBook.author}`;
     bPages.textContent = `${newBook.pages}`;
-    bStatus = `${newBook.status}`;
 
     if (bRack.length > 0) {
         bookRack.insertBefore(lastRack, firstRack);
     }
 
     changeBookColor(bCover);
-    updateBookCount(myLibrary.length);
-    if (bStatus.toLowerCase() == 'read') {
+    updateBookCount();
+    checkReadBook()
+
+    if (newBook.status.toLowerCase() == 'read') {
         statusTag.style.backgroundColor = '#0F9D58'
-    } else if (bStatus.toLowerCase() == 'not read') {
+    } else if (newBook.status.toLowerCase() == 'not read') {
         statusTag.style.backgroundColor = '#F4B400'
     }
 
@@ -227,8 +239,8 @@ function toggleBookOption() {
 
     for (let j = 0; j < 1; j++) {
         let numb = myLibrary.length - 1;
+
         for (let i = 0; i < myLibrary.length; i++) {
-            // console.log(`dummy i value: ${i}`);
             shelf[i].setAttribute('data-key', `${numb}`);
             statusBtn[i].setAttribute('data-key', `${numb}`);
 
@@ -237,15 +249,16 @@ function toggleBookOption() {
             numb = numb - 1;
         }
     }
+}
 
-    function deleteShelf(e) {
-        e.target.parentElement.classList.add('delete--out');
-        setTimeout(() => {
-            e.target.parentElement.remove();
-        }, 100)
-        myLibrary.splice(dBtnCount, 1)
-        updateBookCount(myLibrary.length);
-    }
+function deleteShelf(e) {
+    e.target.parentElement.classList.add('delete--out');
+    setTimeout(() => {
+        e.target.parentElement.remove();
+    }, 100)
+    myLibrary.splice(dBtnCount, 1)
+    updateBookCount();
+    checkReadBook()
 }
 
 function changeReadStatus(e) {
@@ -273,8 +286,8 @@ function changeReadStatus(e) {
             sNumb = sNumb - 1;
         }
     }
+    checkReadBook()
 }
-
 
 addNew.addEventListener('click', createForm);
 document.addEventListener('DOMContentLoaded', () => {
