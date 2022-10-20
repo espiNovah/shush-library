@@ -265,9 +265,9 @@ function addBookIndex() {
         let numb = myLibrary.length - 1;
 
         for (let i = 0; i < myLibrary.length; i++) {
-            book[i].setAttribute('data-key', `${numb}`);
-            statusBtn[i].setAttribute('data-key', `${numb}`);
-            deleteBtn[i].setAttribute('data-key', `${numb}`);
+            book[i].setAttribute('data-book-index', `${numb}`);
+            statusBtn[i].setAttribute('data-book-index', `${numb}`);
+            deleteBtn[i].setAttribute('data-book-index', `${numb}`);
 
             deleteBtn[i].addEventListener('click', deleteBook)
             statusBtn[i].addEventListener('click', changeReadStatus)
@@ -278,12 +278,12 @@ function addBookIndex() {
 
 function deleteBook(e) {
     e.target.parentElement.classList.add('animate--out');
-    const btnKey = e.target.getAttribute('data-key');
+    const btnIndex = e.target.getAttribute('data-book-index');
 
     setTimeout(
         () => {
             e.target.parentElement.remove();
-            myLibrary.splice(btnKey, 1)
+            myLibrary.splice(btnIndex, 1)
             addBookIndex()
             updateBookCount();
             checkReadBook()
@@ -292,17 +292,17 @@ function deleteBook(e) {
 }
 
 function changeReadStatus(e) {
-    const btnKey = e.target.getAttribute('data-key');
-    const book_Key = e.target.parentElement.getAttribute('data-key');
+    const btnIndex = e.target.getAttribute('data-book-index');
+    const bookIndex = e.target.parentElement.getAttribute('data-book-index');
 
-    if (btnKey === book_Key) {
-        const bookStatus = myLibrary[btnKey].status.toLowerCase();
+    if (btnIndex === bookIndex) {
+        const bookStatus = myLibrary[btnIndex].status.toLowerCase();
         if (bookStatus === 'read') {
             e.target.style.backgroundColor = '#F4B400';
-            myLibrary[btnKey].status = 'Not read';
+            myLibrary[btnIndex].status = 'Not read';
         } else if (bookStatus === 'not read') {
             e.target.style.backgroundColor = '#0F9D58';
-            myLibrary[btnKey].status = 'Read';
+            myLibrary[btnIndex].status = 'Read';
         }
     }
     checkReadBook()
