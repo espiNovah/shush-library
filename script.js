@@ -18,7 +18,7 @@ function createForm() {
     titleInput.setAttribute('name', 'title');
     titleInput.setAttribute('class', 'b--title');
     titleInput.setAttribute('placeholder', 'Book Title');
-    // titleInput.required = true;
+    titleInput.required = true;
 
     const divSection = document.createElement('div');
     divSection.classList.add('sh--entry');
@@ -29,7 +29,7 @@ function createForm() {
     authorInput.setAttribute('name', 'author');
     authorInput.setAttribute('class', 'b--author');
     authorInput.setAttribute('placeholder', 'Author');
-    // authorInput.required = true;
+    authorInput.required = true;
 
 
     const selectChoice = document.createElement('select');
@@ -58,7 +58,7 @@ function createForm() {
     numberInput.setAttribute('class', 'b--pages');
     numberInput.id = 'page-count'
     numberInput.setAttribute('min', '1');
-    // numberInput.required = true;
+    numberInput.required = true;
 
     const addBtn = document.createElement('button');
     addBtn.setAttribute('type', 'submit');
@@ -101,9 +101,9 @@ function hideForm() {
     entrySign.disabled = true;
     setTimeout(
         () => {
-        formS.remove()
-        entrySign.disabled = false;
-    }, 400)
+            formS.remove()
+            entrySign.disabled = false;
+        }, 400)
     entrySign.textContent = '+'
 }
 
@@ -144,6 +144,30 @@ function updateBookCount() {
     const bCount = document.querySelector('.a--data').childNodes[0];
     totalBook = myLibrary.length;
     bCount.textContent = totalBook;
+}
+
+function calculateReadingTime() {
+    const totalPages = myLibrary
+        .filter(book => {
+            return book.status.toLowerCase() == 'read'
+        })
+        .reduce((a, b) => {
+            return +b.pages + a
+        }, 0);
+        
+        const averagePageWords = 300;
+        const oneHr = 60;
+        const wordCount = totalPages * averagePageWords;
+        const readingTime = Math.round((wordCount/200)/oneHr);
+        const readingCount = document.querySelector('.reading--hours').childNodes[0]; 
+        
+        if (totalBook == 0 || readingTime == 0){
+            readingCount.textContent = '0'
+        } else if (readingTime < 5) {
+            readingCount.textContent = 'Less than 5 hrs'
+        } else {
+            readingCount.textContent = readingTime
+        }
 }
 
 function checkReadBook() {
@@ -222,6 +246,7 @@ function addBookToLibrary() {
     changeBookColor(bCover);
     updateBookCount();
     checkReadBook()
+    calculateReadingTime()
 
     if (newBook.status.toLowerCase() == 'read') {
         statusTag.style.backgroundColor = '#0F9D58'
@@ -259,6 +284,8 @@ function deleteShelf(e) {
     myLibrary.splice(dBtnCount, 1)
     updateBookCount();
     checkReadBook()
+    calculateReadingTime()
+
 }
 
 function changeReadStatus(e) {
@@ -287,6 +314,7 @@ function changeReadStatus(e) {
         }
     }
     checkReadBook()
+    calculateReadingTime()
 }
 
 addNew.addEventListener('click', createForm);
