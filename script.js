@@ -154,20 +154,20 @@ function calculateReadingTime() {
         .reduce((a, b) => {
             return +b.pages + a
         }, 0);
-        
-        const averagePageWords = 300;
-        const oneHr = 60;
-        const wordCount = totalPages * averagePageWords;
-        const readingTime = Math.round((wordCount/200)/oneHr);
-        const readingCount = document.querySelector('.reading--hours').childNodes[0]; 
-        
-        if (totalBook == 0 || readingTime == 0){
-            readingCount.textContent = '0'
-        } else if (readingTime < 5) {
-            readingCount.textContent = 'Less than 5 hrs'
-        } else {
-            readingCount.textContent = readingTime
-        }
+
+    const averagePageWords = 300;
+    const oneHr = 60;
+    const wordCount = totalPages * averagePageWords;
+    const readingTime = Math.round((wordCount / 200) / oneHr);
+    const readingCount = document.querySelector('.reading--hours').childNodes[0];
+
+    if (totalBook == 0 || readingTime == 0) {
+        readingCount.textContent = '0'
+    } else if (readingTime < 5) {
+        readingCount.textContent = 'Less than 5 hrs'
+    } else {
+        readingCount.textContent = readingTime
+    }
 }
 
 function checkReadBook() {
@@ -215,11 +215,11 @@ function createShelf() {
     bookRack.appendChild(bLog);
 }
 
-function Book(bookTitle, bookAuthor, bookPages, bookStatus) {
-    this.title = bookTitle;
-    this.author = bookAuthor;
-    this.pages = bookPages;
-    this.status = bookStatus;
+function Book(title, author, pages, status) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
 }
 
 function addBookToLibrary() {
@@ -243,22 +243,21 @@ function addBookToLibrary() {
         bookRack.insertBefore(lastRack, firstRack);
     }
 
-    changeBookColor(bCover);
-    updateBookCount();
-    checkReadBook()
-    calculateReadingTime()
-
     if (newBook.status.toLowerCase() == 'read') {
         statusTag.style.backgroundColor = '#0F9D58'
     } else if (newBook.status.toLowerCase() == 'not read') {
         statusTag.style.backgroundColor = '#F4B400'
     }
 
-    toggleBookOption();
+    changeBookColor(bCover);
+    updateBookCount();
+    checkReadBook()
+    calculateReadingTime()
+    addBookIndex();
 }
 
-function toggleBookOption() {
-    const shelf = Array.from(document.querySelectorAll('.book--log'));
+function addBookIndex() {
+    const book = Array.from(document.querySelectorAll('.book--log'));
     const deleteBtn = Array.from(document.querySelectorAll('.delete--log'));
     const statusBtn = Array.from(document.querySelectorAll('.book--status'));
 
@@ -266,51 +265,44 @@ function toggleBookOption() {
         let numb = myLibrary.length - 1;
 
         for (let i = 0; i < myLibrary.length; i++) {
-            shelf[i].setAttribute('data-key', `${numb}`);
+            book[i].setAttribute('data-key', `${numb}`);
             statusBtn[i].setAttribute('data-key', `${numb}`);
+            deleteBtn[i].setAttribute('data-key', `${numb}`);
 
-            deleteBtn[i].addEventListener('click', deleteShelf)
+            deleteBtn[i].addEventListener('click', deleteBook)
             statusBtn[i].addEventListener('click', changeReadStatus)
             numb = numb - 1;
         }
     }
 }
 
-function deleteShelf(e) {
-    e.target.parentElement.classList.add('delete--out');
-    setTimeout(() => {
-        e.target.parentElement.remove();
-    }, 100)
-    myLibrary.splice(dBtnCount, 1)
-    updateBookCount();
-    checkReadBook()
-    calculateReadingTime()
+function deleteBook(e) {
+    e.target.parentElement.classList.add('animate--out');
+    const btnKey = e.target.getAttribute('data-key');
 
+    setTimeout(
+        () => {
+            e.target.parentElement.remove();
+            myLibrary.splice(btnKey, 1)
+            addBookIndex()
+            updateBookCount();
+            checkReadBook()
+            calculateReadingTime()
+        }, 100)
 }
 
 function changeReadStatus(e) {
-    const shelf = Array.from(document.querySelectorAll('.book--log'));
-    const statusBtn = Array.from(document.querySelectorAll('.book--status'));
+    const btnKey = e.target.getAttribute('data-key');
+    const book_Key = e.target.parentElement.getAttribute('data-key');
 
-    for (let i = 0; i < 1; i++) {
-        let numb = myLibrary.length - 1;
-        let sNumb = myLibrary.length - 1;
-
-        for (let j = 0; j < statusBtn.length; j++) {
-            shelf[j].setAttribute('data-key', `${sNumb}`);
-            statusBtn[j].setAttribute('data-key', `${numb}`);
-            if (e.target.getAttribute('data-key') == statusBtn[j].getAttribute('data-key')) {
-                let isRead = myLibrary[numb].status.toLowerCase();
-                if (isRead === 'read') {
-                    e.target.style.backgroundColor = '#F4B400';
-                    myLibrary[numb].status = 'Not read';
-                } else if (isRead === 'not read') {
-                    e.target.style.backgroundColor = '#0F9D58';
-                    myLibrary[numb].status = 'Read';
-                }
-            }
-            numb = numb - 1;
-            sNumb = sNumb - 1;
+    if (btnKey === book_Key) {
+        const bookStatus = myLibrary[btnKey].status.toLowerCase();
+        if (bookStatus === 'read') {
+            e.target.style.backgroundColor = '#F4B400';
+            myLibrary[btnKey].status = 'Not read';
+        } else if (bookStatus === 'not read') {
+            e.target.style.backgroundColor = '#0F9D58';
+            myLibrary[btnKey].status = 'Read';
         }
     }
     checkReadBook()
@@ -319,7 +311,7 @@ function changeReadStatus(e) {
 
 addNew.addEventListener('click', createForm);
 document.addEventListener('DOMContentLoaded', () => {
-    demoBook = {
+    const demoBook = {
         title: 'The Great Gatsby',
         author: 'F. Scott Fitzgerald',
         pages: '110',

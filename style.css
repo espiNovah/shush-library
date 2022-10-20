@@ -440,7 +440,7 @@ form button:active {
     }
 }
 
-.delete--out {
+.animate--out {
     position: relative;
     -webkit-animation: linear;
     -webkit-animation-name: run;
