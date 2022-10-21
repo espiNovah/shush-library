@@ -274,17 +274,12 @@ body {
     right: -25px;
     padding: 10px;
     border-radius: 50%;
-    background-color: var(--colorBeta);
+    background-color: rgb(255, 0, 0);
     cursor: pointer;
 }
 
-.delete--log:hover {
-    background-color: rgb(255, 0, 0);
-}
-
 .delete--log:active {
-    filter: brightness(0.95);
-    box-shadow: 2px 2px 8px grey;
+    filter: brightness(0.9);
 }
 
 .delete--log>svg {
@@ -333,7 +328,7 @@ h2.book--title {
 
 }
 
-.book--status:hover {
+.book--status:active {
     filter: brightness(1.1);
 }
 
