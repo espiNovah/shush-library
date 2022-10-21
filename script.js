@@ -151,8 +151,8 @@ function calculateReadingTime() {
         .filter(book => {
             return book.status.toLowerCase() == 'read'
         })
-        .reduce((a, b) => {
-            return +b.pages + a
+        .reduce((previous, current) => {
+            return +current.pages + previous
         }, 0);
 
     const averagePageWords = 300;
@@ -249,6 +249,7 @@ function addBookToLibrary() {
         statusTag.style.backgroundColor = '#F4B400'
     }
 
+    checkAvailableBooks();
     changeBookColor(bCover);
     updateBookCount();
     checkReadBook()
@@ -269,8 +270,8 @@ function addBookIndex() {
             statusBtn[i].setAttribute('data-book-index', `${numb}`);
             deleteBtn[i].setAttribute('data-book-index', `${numb}`);
 
-            deleteBtn[i].addEventListener('click', deleteBook)
-            statusBtn[i].addEventListener('click', changeReadStatus)
+            deleteBtn[i].addEventListener('click', deleteBook);
+            statusBtn[i].addEventListener('click', changeReadStatus);
             numb = numb - 1;
         }
     }
@@ -283,12 +284,29 @@ function deleteBook(e) {
     setTimeout(
         () => {
             e.target.parentElement.remove();
-            myLibrary.splice(btnIndex, 1)
-            addBookIndex()
+            myLibrary.splice(btnIndex, 1);
+            checkAvailableBooks();
+            addBookIndex();
             updateBookCount();
-            checkReadBook()
-            calculateReadingTime()
+            checkReadBook();
+            calculateReadingTime();
         }, 100)
+}
+
+function checkAvailableBooks() {
+    const EMPTY_LIBRARY_NOTICE = 'Ops... Your library is currently empty';
+    if (myLibrary.length === 0) {
+        const note = document.createElement('p');
+        note.textContent = EMPTY_LIBRARY_NOTICE;
+        bookRack.appendChild(note);
+    } else if (myLibrary.length === 1) {
+        const rackChildren = document.querySelector('.book--rack').childNodes;
+        for (let i = 0; i < rackChildren.length; i++) {
+            if (rackChildren[i].nodeName.toLowerCase() == 'p') {
+                rackChildren[i].remove();
+            }
+        }
+    }
 }
 
 function changeReadStatus(e) {
@@ -305,8 +323,8 @@ function changeReadStatus(e) {
             myLibrary[btnIndex].status = 'Read';
         }
     }
-    checkReadBook()
-    calculateReadingTime()
+    checkReadBook();
+    calculateReadingTime();
 }
 
 addNew.addEventListener('click', createForm);

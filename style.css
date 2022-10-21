@@ -28,9 +28,11 @@ body {
     font-family: 'poppins';
     font-size: 14px;
 }
+
 .favIcon img {
     width: 100%;
 }
+
 .s--icon {
     display: flex;
     justify-content: center;
@@ -95,10 +97,12 @@ body {
     display: grid;
     letter-spacing: 1.4px;
 }
+
 .header--title a {
     color: red;
     text-decoration: none;
 }
+
 .header--title a:hover {
     color: var(--colorBeta);
 }
@@ -227,6 +231,14 @@ body {
     overflow: auto;
 }
 
+.book--rack>p {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    padding: 10%;
+    border-bottom-color: #F19F6F;
+    color: red;
+}
+
 .book--log {
     display: grid;
     grid-template-columns: auto 1fr;
@@ -240,6 +252,7 @@ body {
     background-color: var(--colorSnow);
 
 }
+
 .book--log:hover {
     box-shadow: -1px 6px 9px grey
 }
@@ -256,7 +269,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 30px;
-    width: 30px;    
+    width: 30px;
     top: 35px;
     right: -25px;
     padding: 10px;
